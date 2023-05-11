@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takoto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 60%;
+            max-width: 400px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        p {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        li {
+            background-color: #007BFF;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        li:hover {
+            background-color: #8300b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello There!</h1>
+
+        <ul>
+            <li id="chat">Let's Chat!</li>
+            <!-- <li id="file-sharing">Chat</li>
+            <li id="real-time-drawing">Talk</li>
+            <li id="audio-video">Audio & Video</li>
+            <li id="speech-to-text">Speech to Text</li>
+            <li id="text-chat">Text Chat</li>
+            <li id="video-sharing">Video Sharing</li> -->
+        </ul>
+    </div>
+    <script>
+        document.getElementById("chat").addEventListener("click", function() {
+            window.location.href = "src/chat.html";
+        });
+        // document.getElementById("file-sharing").addEventListener("click", function() {
+        //     window.location.href = "src/file-sharing.html";
+        // });
+        // document.getElementById("real-time-drawing").addEventListener("click", function() {
+        //     alert("Real-time Drawing clicked");
+        // });
+        // document.getElementById("audio-video").addEventListener("click", function() {
+        //     alert("Audio & Video clicked");
+        // });
+        // document.getElementById("speech-to-text").addEventListener("click", function() {
+        //     alert("Speech to Text clicked");
+        // });
+        // document.getElementById("text-chat").addEventListener("click", function() {
+        //     alert("Text Chat clicked");
+        // });
+        // document.getElementById("video-sharing").addEventListener("click", function() {
+        //     alert("Video Sharing clicked");
+        // });
+    </script>
+</body>
+</html>
