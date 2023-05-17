@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takoto</title>
+    <style>
+       body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 60%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        #user-name {
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #confirm-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: #007BFF;
+            cursor: pointer;
+        }
+        #confirm-button:hover {
+            background-color: #8300b3;
+        }
+        #home-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;  
+            height: 50px; 
+            border: none;
+            cursor: pointer;
+            background-image: url('/static/images/takodachi01.png'); 
+            background-size: cover; 
+        }
+        #home-button:hover {
+            background-image: url('/static/images/takodachi02.png'); 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter your name!</h1>
+        <form id="username" action="/submit" method="post">   
+            <input id="user-name" name="userName" type="text" placeholder="Enter your name">
+        </form>
+            <button id="confirm-button">Confirm</button>
+        
+        <button id="home-button"></button>
+    </div>
+    
+    <script>
+        const username=document.getElementById("username");
+        document.getElementById("confirm-button").addEventListener("click", function() {
+            var userName = document.getElementById("user-name").value;
+            if (userName) {
+                {% for user in online_users %}
+                if (userName == "{{ user }}") {
+                    alert("This name is already taken");
+                    return;
+                }
+                {% endfor %}
+                username.submit();
+            } 
+            else {
+                alert("Please enter your name");
+            }
+            
+        });
+        document.getElementById("home-button").addEventListener("click", function() {
+            window.location.href = "/";
+        });
+    </script>
+</body>
+</html>

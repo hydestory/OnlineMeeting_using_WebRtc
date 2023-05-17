@@ -57,11 +57,11 @@
             height: 50px; 
             border: none;
             cursor: pointer;
-            background-image: url('../docs/images/takodachi01.png'); 
+            background-image: url('/static/images/takodachi01.png'); 
             background-size: cover; 
         }
         #home-button:hover {
-            background-image: url('../docs/images/takodachi02.png'); 
+            background-image: url('/static/images/takodachi02.png'); 
         }
         
         /* #home-button {
@@ -87,7 +87,7 @@
         <h1>What do you want?</h1>
         <ul>
             <li id="chat">Chat!</li>
-            <li id="chat">Talk!</li>
+            <li id="talk">Talk!</li>
         </ul>
         <button id="home-button"></button>
     </div>
@@ -95,8 +95,11 @@
         document.getElementById("chat").addEventListener("click", function() {
             window.location.href = "src/chat.html";
         });
+        document.getElementById("chat").addEventListener("click", function() {    //還在等功能實作
+            window.location.href = "src/chat.html";
+        });
         document.getElementById("home-button").addEventListener("click", function() {
-            window.location.href = "../index.html";
+            window.location.href = "/";
         });
     </script>
 </body>

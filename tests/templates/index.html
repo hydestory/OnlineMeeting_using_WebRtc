@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>多人聊天</title>
+</head>
+<body>
+    <video id="localVideo" autoplay></video>
+    <div id="remoteVideos"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client/dist/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        var localVideo = document.getElementById('localVideo');
+        var remoteVideosDiv = document.getElementById('remoteVideos');
+
+        // 獲取本地媒體流
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(function(stream) {
+                localVideo.srcObject = stream;
+
+                // 將本地媒體流傳送給其他用戶
+                var sender = socket.emit('stream', stream);
+
+                // 接收其他用戶的媒體流
+                socket.on('stream', function(remoteStream) {
+                    var remoteVideo = document.createElement('video');
+                    remoteVideo.srcObject = remoteStream;
+                    remoteVideo.autoplay = true;
+                    remoteVideosDiv.appendChild(remoteVideo);
+                });
+            })
+            .catch(function(error) {
+                console.error('Error accessing media devices:', error);
+            });
+    </script>
+</body>
+</html>

@@ -56,37 +56,16 @@
         <h1>Hello There!</h1>
 
         <ul>
-            <li id="chat">Let's Chat!</li>
-            <!-- <li id="file-sharing">Chat</li>
-            <li id="real-time-drawing">Talk</li>
-            <li id="audio-video">Audio & Video</li>
-            <li id="speech-to-text">Speech to Text</li>
-            <li id="text-chat">Text Chat</li>
-            <li id="video-sharing">Video Sharing</li> -->
+            <form id='go' action="/register" method="post">
+                <li id="chat">Let's Chat!</li>
+            </form>
         </ul>
     </div>
     <script>
         document.getElementById("chat").addEventListener("click", function() {
-            window.location.href = "src/chat.html";
+            go.submit();
         });
-        // document.getElementById("file-sharing").addEventListener("click", function() {
-        //     window.location.href = "src/file-sharing.html";
-        // });
-        // document.getElementById("real-time-drawing").addEventListener("click", function() {
-        //     alert("Real-time Drawing clicked");
-        // });
-        // document.getElementById("audio-video").addEventListener("click", function() {
-        //     alert("Audio & Video clicked");
-        // });
-        // document.getElementById("speech-to-text").addEventListener("click", function() {
-        //     alert("Speech to Text clicked");
-        // });
-        // document.getElementById("text-chat").addEventListener("click", function() {
-        //     alert("Text Chat clicked");
-        // });
-        // document.getElementById("video-sharing").addEventListener("click", function() {
-        //     alert("Video Sharing clicked");
-        // });
+
     </script>
 </body>
 </html>
