@@ -6,11 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>test for js</title>
     <script src="https://cdn.socket.io/4.1.2/socket.io.js"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
     <style>
         .modal-content {
             background-image: url('static/images/takodachi01.png');
@@ -61,6 +65,16 @@
         <video class="video-player" id="user-2" autoplay playsinline></video>
     </div>
     <div id="controls">
+        <!-- <button id="refresh-btn" class="btn btn-primary control-container" title="如果沒有顯示畫面請點擊這個按鈕">重新整理</button> -->
+        <div class="control-container btn btn-primary" title="如果沒有顯示畫面請點擊這個按鈕" id="refresh-btn" >
+            <img src="/static/images/reload.png" />
+        </div>
+
+        <!-- <button id="screen-share-btn" class="control-container" type="button">分享螢幕</button> -->
+        <div class="control-container" id="screen-share-btn" >
+            <img src="/static/images/screen.png" />
+        </div>
+
 
         <div class="control-container" id="camera-btn" >
             <img src="/static/images/camera.png" />
@@ -81,6 +95,7 @@
                 <img src="/static/images/phone.png" />
             </div>
         </a>
+
 
     </div>
     
@@ -133,5 +148,6 @@
 
 
     <script src="{{ url_for('static', filename='main.js') }}"></script>
+
 </body>
 </html>

@@ -88,4 +88,4 @@ def handle_reject_request(user):
 
 if __name__ == '__main__':
     socketio.run(app)
-    app.debug = True
+    

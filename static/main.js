@@ -1,6 +1,7 @@
 let localstream;
 let remotestream;
 let message;
+let screenTrack;
 
 const socket = io.connect('http://127.0.0.1:5000')
 
@@ -152,7 +153,41 @@ let addMessageToChat = (type, message) => {
 
 document.querySelector('.input-group-append button').addEventListener('click', sendChatMessage);
 
+//change to screen share
 
+
+let shareScreen = async () => {
+    if (!screenTrack) {
+        screenTrack = await navigator.mediaDevices.getDisplayMedia({video: true});
+        // Replace localstream with screen track
+        localstream.getTracks().forEach(track => track.stop());
+        localstream = screenTrack;
+
+        
+        let sender = peerConnection.getSenders().find(s => s.track.kind === 'video');
+        sender.replaceTrack(screenTrack.getTracks()[0]);
+        document.getElementById('screen-share-btn').style.backgroundColor = 'rgb(255, 80, 80)'
+    } else {
+        // Stop screen sharing
+        screenTrack.getTracks().forEach(track => track.stop());
+        screenTrack = null;
+
+        // Replace localstream back to camera and mic
+        localstream = await navigator.mediaDevices.getUserMedia({video: true, audio: true});
+        // Replace track in peer connection
+        let videoTrack = localstream.getTracks().find(track => track.kind === 'video');
+        let sender = peerConnection.getSenders().find(s => s.track.kind === 'video');
+        sender.replaceTrack(videoTrack);
+
+        
+        document.getElementById('screen-share-btn').style.backgroundColor = 'rgb(179, 102, 249, .9)'
+    }
+};
+
+
+
+
+//
 
 let toggleCamera = async () => {
     let videoTrack = localstream.getTracks().find(track => track.kind === 'video')
@@ -178,11 +213,23 @@ let toggleMic = async () => {
     }
 }
 
+let toggleChat = () => {
+    
+    let working=true
+    if(working){
+        audioTrack.enabled = false
+        document.getElementById('chat-btn').style.backgroundColor = 'rgb(255, 80, 80)'
+    }else{
+        audioTrack.enabled = true
+        document.getElementById('chat-btn').style.backgroundColor = 'rgb(179, 102, 249, .9)'
+    }
+}
+
+document.getElementById('screen-share-btn').addEventListener('click', shareScreen)
 document.getElementById('camera-btn').addEventListener('click', toggleCamera)
 document.getElementById('mic-btn').addEventListener('click', toggleMic)
-document.getElementById('chat-btn').addEventListener('click', function() {
-    console.log('chat button clicked')
-    $('#chatModal').modal('show');
-});
+document.getElementById('chat-btn').addEventListener('click', ()=>$('#chatModal').modal('show'))
+document.getElementById('refresh-btn').addEventListener('click', () =>location.reload())
+
 
 init()
