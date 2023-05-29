@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test for js</title>
+    <script src="https://cdn.socket.io/4.1.2/socket.io.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        .modal-content {
+            background-image: url('static/images/takodachi01.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+        }
+        .chat-container {
+            height: 200px;
+            border: 1px solid #cccccc;
+            padding: 10px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            overflow-y: scroll;
+        }
+        .input-group {
+            /* border-radius: 15px; */
+            overflow: hidden;
+        }
+        .input-group input {
+            border: none;
+            padding: 10px;
+            background-color: #eeeeee;
+        }
+        .input-group .btn-primary {
+            border: none;
+            background-color: #007bff;
+        }
+        .modal-header {
+            border: none;
+        }
+        .modal-body {
+            padding: 2rem;
+        }
+        .chat-text {
+            font-size: 1.3rem;
+        }
+        </style>
+        
+</head>
+<body>
+    <div id="videos">
+        <video class="video-player" id="user-1" autoplay playsinline></video>
+        <video class="video-player" id="user-2" autoplay playsinline></video>
+    </div>
+    <div id="controls">
+
+        <div class="control-container" id="camera-btn" >
+            <img src="/static/images/camera.png" />
+        </div>
+
+        <div class="control-container" id="mic-btn" >
+            <img src="/static/images/mic.png" />
+        </div>
+
+        
+        <div class="control-container" id="chat-btn" >
+            <img src="/static/images/chat.png" />
+        </div>
+        
+
+        <a href="/">
+            <div class="control-container" id="leave-btn">
+                <img src="/static/images/phone.png" />
+            </div>
+        </a>
+
+    </div>
+    
+
+    <!-- Chat interface -->
+    <div class="modal fade" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="chatModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="chatModalLabel">聊天室</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="chat-container">
+                        <!-- 在這裡添加訊息 -->
+                    </div>
+                    <div style="margin-top:10px;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="輸入您的訊息...">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">送出</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+    <!-- Local Message Template -->
+    <div id="local-message-template" style="display: none;">
+        <div class="text-right mb-2">
+            <div class="badge badge-primary text-wrap chat-text" >
+                <span class="message-content"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remote Message Template -->
+    <div id="remote-message-template" style="display: none;">
+        <div class="text-left mb-2">
+            <div class="badge badge-secondary text-wrap chat-text" >
+                <span class="message-content"></span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
