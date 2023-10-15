@@ -1,22 +1,18 @@
 from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO,emit
 from flask_cors import CORS
+import openai
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key'
-socketio = SocketIO(app, cors_allowed_origins="*")  # 設定跨域
-
-online_users = []  # 在線使用者列表
-connected_users= [] # 連線中使用者列表
-pending_connections = {}  # 建立一個 dictionary 來存放等待對方回覆的使用者
-
-
-
+socketio = SocketIO(app, cors_allowed_origins="*")  
 CORS(app)
 
-@app.route('/api/online_users', methods=['GET'])
-def get_online_users():
-    return jsonify(online_users)
+openai.api_key= "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"
+online_users = []  
+connected_users= [] 
+pending_connections = {} 
+
+conversation=[{"role": "system", "content": "你是一個聊天助手"}]
 
 @app.route('/')
 def index():
@@ -40,6 +36,10 @@ def livetalk():
 def livechat():
     return render_template('livechat.html')
 
+@app.route('/api/online_users', methods=['GET'])
+def get_online_users():
+    return jsonify(online_users)
+
 @socketio.on('message')
 def handle_message(chatmessage):
     emit('message', chatmessage, broadcast=True)
@@ -61,7 +61,6 @@ def handle_ice_candidate(message):
     emit('ice_candidate', {'candidate': candidate}, broadcast=True, include_self=False)
 
 
-#new
 @socketio.on('connect_request')
 def handle_connect_request(requester, requested):
     if requested in online_users:
@@ -85,7 +84,20 @@ def handle_reject_request(user):
         requester = pending_connections.pop(user)
         emit('connect_rejected')
 
+@socketio.on('ask_chatgpt')
+def handle_chatgptquestion(message):
+        conversation.append({"role": "assistant", "content": message})
+        response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=conversation,
+        max_tokens=128,
+        temperature=1,
+        top_p=0.9
+        )
+        response=response['choices'][0]['message']['content']
+        conversation.append({"role": "assistant", "content": response})
+        emit('answerfromchatgpt', response, include_self=True)
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app,port=5000)
     

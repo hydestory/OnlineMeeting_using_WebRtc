@@ -72,26 +72,26 @@
     </div>
     
     <script>
-        const username=document.getElementById("username");
+        const username=document.getElementById("username")
         document.getElementById("confirm-button").addEventListener("click", function() {
-            var userName = document.getElementById("user-name").value;
+            var userName = document.getElementById("user-name").value
             if (userName) {
                 {% for user in online_users %}
                 if (userName == "{{ user }}") {
-                    alert("This name is already taken");
+                    alert("This name is already taken")
                     return;
                 }
                 {% endfor %}
-                username.submit();
+                username.submit()
             } 
             else {
-                alert("Please enter your name");
+                alert("Please enter your name")
             }
             
-        });
+        })
         document.getElementById("home-button").addEventListener("click", function() {
-            window.location.href = "/";
-        });
+            window.location.href = "/"
+        })
     </script>
 </body>
 </html>

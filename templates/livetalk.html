@@ -25,7 +25,7 @@
             box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
         }
         .chat-container {
-            height: 200px;
+            height: 400px;
             border: 1px solid #cccccc;
             padding: 10px;
             background-color: white;
@@ -38,6 +38,7 @@
             /* border-radius: 15px; */
             overflow: hidden;
         }
+        
         .input-group input {
             border: none;
             padding: 10px;
@@ -47,6 +48,33 @@
             border: none;
             background-color: #007bff;
         }
+
+        .chat-containers {
+            height: 400px;
+            border: 1px solid #cccccc;
+            padding: 10px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            overflow-y: scroll;
+        }
+        
+        .input-groups {
+            /* border-radius: 15px; */
+            overflow: hidden;
+        }
+        
+        .input-groups input {
+            border: none;
+            padding: 10px;
+            background-color: #eeeeee;
+        }
+        .input-groups .btn-primary {
+            border: none;
+            background-color: #007bff;
+        }
+
         .modal-header {
             border: none;
         }
@@ -65,12 +93,12 @@
         <video class="video-player" id="user-2" autoplay playsinline></video>
     </div>
     <div id="controls">
-        <!-- <button id="refresh-btn" class="btn btn-primary control-container" title="如果沒有顯示畫面請點擊這個按鈕">重新整理</button> -->
+        
         <div class="control-container btn btn-primary" title="如果沒有顯示畫面請點擊這個按鈕" id="refresh-btn" >
             <img src="/static/images/reload.png" />
         </div>
 
-        <!-- <button id="screen-share-btn" class="control-container" type="button">分享螢幕</button> -->
+        
         <div class="control-container" id="screen-share-btn" >
             <img src="/static/images/screen.png" />
         </div>
@@ -89,6 +117,9 @@
             <img src="/static/images/chat.png" />
         </div>
         
+        <div class="control-container" id="chatgpt-btn">
+            <img src="/static/images/chatgpt.png" />
+        </div>
 
         <a href="/">
             <div class="control-container" id="leave-btn">
@@ -96,9 +127,38 @@
             </div>
         </a>
 
+        
 
     </div>
+
     
+    <!-- chatgpt -->
+    <div class="modal fade" id="chatgptModal" tabindex="-1" role="dialog" aria-labelledby="chatModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="chatModalLabel">Ask Chatgpt</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="chat-room">
+                        <div class="chat-containers">
+                            
+                        </div>
+                        <div class="input-groups">
+                            <input type="text" class="form-control" placeholder="輸入您的訊息...">
+                            <div class="input-group-appends">
+                                <button class="btn btn-primary" type="button">Ask</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+
 
     <!-- Chat interface -->
     <div class="modal fade" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="chatModalLabel" aria-hidden="true">
@@ -112,13 +172,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="chat-container">
-                        <!-- 在這裡添加訊息 -->
+                        
                     </div>
                     <div style="margin-top:10px;">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="輸入您的訊息...">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">送出</button>
+                            
                         </div>
                     </div>
                     </div>
